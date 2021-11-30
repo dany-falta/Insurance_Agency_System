@@ -1,46 +1,109 @@
-{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
-content %}
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block content %}
 <form method="POST">
   <h3 align="center">Зарегистрироваться</h3>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Введите email" />
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Введите email"
+    />
   </div>
   <div class="row">
     <div class="form-group col-xl-4">
       <label for="lastName">Фамилия</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Введите фамилию" />
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        name="lastName"
+        placeholder="Введите фамилию"
+        required="required"
+      />
     </div>
     <div class="form-group col-xl-4">
       <label for="firstName">Имя</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Введите имя" />
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        placeholder="Введите имя"
+        required="required"
+      />
     </div>
     <div class="form-group col-xl-4">
       <label for="middleName">Отчество</label>
-      <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Введите отчество" />
+      <input
+        type="text"
+        class="form-control"
+        id="middleName"
+        name="middleName"
+        placeholder="Введите отчество"
+      />
     </div>
   </div>
   <div class="form-group">
     <label for="dateOfBirth">Дата рождения</label>
-    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="Введите дату рождения" />
+    <input
+      type="date"
+      class="form-control"
+      id="dateOfBirth"
+      name="dateOfBirth"
+      placeholder="Введите дату рождения"
+      required="required"
+    />
   </div>
   <div class="form-group">
     <label for="phoneNo">Номер телефона</label>
-    <input type="tel" class="form-control" id="phoneNo" name="phoneNo" placeholder="Введите номер телефона" />
+    <input
+      type="tel"
+      class="form-control"
+      id="phoneNo"
+      name="phoneNo"
+      placeholder="Введите номер телефона"
+      required="required"
+    />
   </div>
   <div class="form-group">
     <label for="address">Адрес</label>
-    <input type="text" class="form-control" id="address" name="address" placeholder="Введите адрес" />
+    <input
+      type="text"
+      class="form-control"
+      id="address"
+      name="address"
+      placeholder="Введите адрес"
+      required="required"
+    />
   </div>
   <div class="form-group">
     <label for="password1">Password</label>
-    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password" />
+    <input
+      type="password"
+      class="form-control"
+      id="password1"
+      name="password1"
+      placeholder="Введите пароль"
+      required="required"
+    />
   </div>
   <div class="form-group">
-    <label for="password2">Password (Confirm)</label>
-    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password" />
+    <label for="password2">Password <em>(Confirm)</em>
+    </label>
+    <input
+      type="password"
+      class="form-control"
+      id="password2"
+      name="password2"
+      placeholder="Введите пароль повторно"
+      required="required"
+    />
   </div>
   <br />
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-{% endblock %}
+  <button
+    type="submit"
+    class="btn btn-primary"
+  >Submit</button>
+</form> {% endblock %}
