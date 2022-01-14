@@ -1,0 +1,192 @@
+{% extends "agent.html" %} {% block title %}Клиенты{% endblock %} {% block content
+%}
+<h1 align="center">Клиенты</h1>
+
+<table
+  id="myTable"
+  class="table table-striped table-hover table-dark table-responsive"
+>
+  <thead>
+    <tr>
+
+      <th data-field="id">ID</th>
+      <th data-field="last_name">Фамилия</th>
+      <th data-field="first_name">Имя</th>
+      <th data-field="middle_name">Отчество</th>
+      <th data-field="phone_no">Номер телефона</th>
+      <th data-field="agent_id">ID Агента</th>
+      <th data-field="email">email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    {% for item in clients %}
+    <tr>
+      <td>{{ item.user_id }}</td>
+      <td>{{ item.first_name }}</td>
+      <td>{{ item.last_name }}</td>
+      <td>{{ item.middle_name }}</td>
+      <td>{{ item.phone_no }}</td>
+      <td>{{ item.agent_id }}</td>
+      <td>{{ item.user.email }}</td>
+      <td>
+        {% if item.agent_id == None %}
+        <a
+          href="/Agent/client_link/{{ item.user_id }}"
+          class="btn btn-outline btn-info"
+          onclick="return confirm('Вы уверены, что хотите привязать Клиента?')"
+        >Привязать</a>
+        {% elif item.agent_id == current_user.id %}
+        <a
+          href="/Agent/client_link/{{ item.user_id }}"
+          class="btn btn-danger btn-xs"
+          onclick="return confirm('Вы уверены, что хотите отвязать Клиента?')"
+        >Отвязать</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+</tbody>
+
+<div
+  class="container"
+  align="center"
+>
+  <button
+    type="button"
+    class="btn btn-success float-right"
+    data-toggle="modal"
+    data-target="#mymodal"
+  >Добавить клиента</button>
+  <div
+    id="mymodal"
+    class="modal fade"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Добавить клиента</h4>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Введите email"
+                value="{{ request.form['email'] }}"
+              />
+            </div>
+            <div class="row">
+              <div class="form-group col-xl-4">
+                <label for="last_name">Фамилия</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last_name"
+                  name="last_name"
+                  placeholder="Введите фамилию"
+                  required="required"
+                  value="{{ request.form['last_name'] }}"
+                />
+              </div>
+              <div class="form-group col-xl-4">
+                <label for="first_name">Имя</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first_name"
+                  name="first_name"
+                  placeholder="Введите имя"
+                  required="required"
+                  value="{{ request.form['first_name'] }}"
+                />
+              </div>
+              <div class="form-group col-xl-4">
+                <label for="middle_name">Отчество</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="middle_name"
+                  name="middle_name"
+                  placeholder="Введите отчество"
+                  value="{{ request.form['middle_name'] }}"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="date_of_birth">Дата рождения</label>
+              <input
+                type="date"
+                class="form-control"
+                id="date_of_birth"
+                name="date_of_birth"
+                placeholder="Введите дату рождения"
+                required="required"
+                value="{{ request.form['date_of_birth'] }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone_no">Номер телефона</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone_no"
+                name="phone_no"
+                placeholder="Введите Номер телефона"
+                required="required"
+                value="{{ request.form['phone_no'] }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Адрес</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                name="address"
+                placeholder="Введите адрес"
+                required="required"
+                value="{{ request.form['address'] }}"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="hidden"
+                id="agent_id"
+                name="agent_id"
+                value="{{ current_user.id }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Введите пароль"
+                required="required"
+              />
+            </div>
+            <div align="center">
+              <button
+                type="submit"
+                class="btn btn-primary"
+              >Добавить клиента</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

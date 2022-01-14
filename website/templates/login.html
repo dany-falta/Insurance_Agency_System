@@ -10,6 +10,7 @@
       id="email"
       name="email"
       placeholder="Enter email"
+      value="{{ request.form['email'] }}"
     />
   </div>
   <div class="form-group">
@@ -21,18 +22,6 @@
       name="password"
       placeholder="Enter password"
     />
-  </div>
-  <div class="form-group">
-    <label for "role"> Тип пользователя</label>
-    <select
-      id="role"
-      class="form-control"
-      name="role"
-    >
-      <option value="Clients">Клиент</option>
-      <option value="Agent">Агент</option>
-      <option value="Admin">Админ</option>
-    </select>
   </div>
   <br />
   <button

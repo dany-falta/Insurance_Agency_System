@@ -1,0 +1,273 @@
+{% extends "admin.html" %} {% block title %}Агенты{% endblock %} {% block content
+%}
+<h1 align="center">Агенты</h1>
+<table
+  id="myTable"
+  class="table table-striped table-hover table-dark table-responsive"
+>
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="last_name">Фамилия</th>
+      <th data-field="first_name">Имя</th>
+      <th data-field="middle_name">Отчество</th>
+      <th data-field="license_no">Номер лицензии</th>
+      <th data-field="comission">Комиссия</th>
+      <th data-field="email">email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    {% for item in agents %}
+    <tr>
+      <td>{{ item.user_id }}</td>
+      <td>{{ item.last_name }}</td>
+      <td>{{ item.first_name }}</td>
+      <td>{{ item.middle_name }}</td>
+      <td>{{ item.license_no }}</td>
+      <td>{{ item.comission }}</td>
+      <td>{{ item.user.email }}</td>
+      <td>
+        <a
+          href="/agent_update/{{ item.user_id }}"
+          class="btn btn-outline btn-info"
+          data-toggle="modal"
+          data-target="#modalEditAgents{{ item.user_id }}"
+        >Редактировать</a>
+        <a
+          href="/Admin/agent_delete/{{ item.user_id }}"
+          class="btn btn-danger btn-xs"
+          onclick="return confirm('Вы уверены, что хотите удалить агента?')"
+        >Удалить</a>
+      </td>
+    </tr>
+
+    <div
+      id="modalEditAgents{{item.user_id}}"
+      class="modal fade"
+      role="dialog"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Редактирование</h4>
+          </div>
+          <div class="modal-body">
+            <form
+              action="{{ url_for('admin.update_agent') }}"
+              method="POST"
+            >
+              <div class="form-group">
+                <label>Фамилия:</label>
+                <input
+                  type="hidden"
+                  name="id"
+                  value="{{ item.user_id }}"
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="lastName"
+                  value="{{ item.last_name }}"
+                >
+              </div>
+              <div class="form-group">
+                <label>Имя:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="firstName"
+                  value="{{ item.first_name }}"
+                >
+              </div>
+              <div class="form-group">
+                <label>Отчество:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="middleName"
+                  value="{{ item.middle_name }}"
+                >
+              </div>
+              <div class="form-group">
+                <label>Номер лицензии:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="licenseNo"
+                  value="{{ item.license_no }}"
+                >
+              </div>
+              <div class="form-group">
+                <label>Комиссия:</label>
+                <input
+                  type="number"
+                  step=0.0001
+                  class="form-control"
+                  name="comission"
+                  value="{{ item.comission }}"
+                >
+              </div>
+              <div class="form-group">
+                <label>email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  value="{{ item.user.email }}"
+                >
+              </div>
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Введите новый пароль"
+                />
+              </div>
+              <div class="form-group">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                >Update</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</table>
+</div>
+</tbody>
+<!-- Modal Edit Employee-->
+<div
+  class="container"
+  align="center"
+>
+  <button
+    type="button"
+    class="btn btn-success float-right"
+    data-toggle="modal"
+    data-target="#mymodal"
+  >Добавить агента</button>
+  <div
+    id="mymodal"
+    class="modal fade"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Добавить агента</h4>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Введите email"
+                value="{{ request.form['email'] }}"
+              />
+            </div>
+            <div class="row">
+              <div class="form-group col-xl-4">
+                <label for="lastName">Фамилия</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Введите фамилию"
+                  required="required"
+                  value="{{ request.form['lastName'] }}"
+                />
+              </div>
+              <div class="form-group col-xl-4">
+                <label for="firstName">Имя</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Введите имя"
+                  required="required"
+                  value="{{ request.form['firstName'] }}"
+                />
+              </div>
+              <div class="form-group col-xl-4">
+                <label for="middleName">Отчество</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="middleName"
+                  name="middleName"
+                  placeholder="Введите отчество"
+                  value="{{ request.form['middleName'] }}"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="licenseNo">Номер Лицензии</label>
+              <input
+                type="number"
+                class="form-control"
+                id="licenseNo"
+                name="licenseNo"
+                placeholder="Введите Номер Лицензии"
+                value="{{ request.form['licenseNo'] }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="comission">Комиссия</label>
+              <input
+                type="number"
+                step=0.0001
+                class="form-control"
+                id="comission"
+                name="comission"
+                placeholder="Введите Комиссию"
+                value="{{ request.form['comission'] }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Введите пароль"
+                required="required"
+              />
+            </div>
+            <div align="center">
+              <button
+                type="submit"
+                id="form1-submit"
+                name="form1-submit"
+                class="btn btn-primary"
+              >Добавить Агента</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

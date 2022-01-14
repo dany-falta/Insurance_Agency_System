@@ -1,0 +1,100 @@
+{% extends "agent.html" %} {% block title %}Покупки{% endblock %} {% block content
+%}
+<h1 align="center">Покупки</h1>
+
+<table
+  id="myTable"
+  class="table table-striped table-hover table-dark table-responsive"
+>
+  <thead>
+    <tr>
+
+      <th data-field="id">ID</th>
+      <th data-field="purchase_date">Дата покупки</th>
+      <th data-field="policy_id">ID Полиса</th>
+      <th data-field="client_id">ID Клиента</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    {% for item in purchases %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.purchase_date }}</td>
+      <td>{{ item.policy_id }}</td>
+      <td>{{ item.client_id }}</td>
+      {% endfor %}
+</table>
+</div>
+</tbody>
+
+<div
+  class="container"
+  align="center"
+>
+  <button
+    type="button"
+    class="btn btn-success float-right"
+    data-toggle="modal"
+    data-target="#mymodal"
+  >Добавить покупку</button>
+  <div
+    id="mymodal"
+    class="modal fade"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Добавить покупку</h4>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            <div class="form-group">
+              <label>Дата покупки:</label>
+              <input
+                type="datetime-local"
+                step="1"
+                class="form-control"
+                name="purchase_date"
+                placeholder="Введите дату покупки"
+                value="{{ request.form['purchase_date'] }}"
+              >
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="policy_id">ID Полиса:</label>
+              <br>
+              <select name="policy_id">
+                {% for item in policies %}
+                <option value="{{ item.id }}">{{ item.id }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="client_id">ID клиента:</label>
+              <br>
+              <select name="client_id">
+                {% for item in clients %}
+                <option value="{{ item.user_id }}">{{ item.user_id }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <br>
+            <div align="center">
+              <button
+                type="submit"
+                id="form1-submit"
+                name="form1-submit"
+                class="btn btn-primary"
+              >Добавить покупку</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

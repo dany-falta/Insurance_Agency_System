@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block title %}Полисы{% endblock %} {% block content
+%}
+<h1 align="center">Полисы</h1>
+<div
+  class="row"
+  style="margin-top:20px; margin-left:20px"
+>
+  <div class="col-8">
+    <h2>Доступные полисы на данный момент</h2>
+    <p>Нажмите купить, чтобы приобрести полис!</p>
+    <br>
+    <table
+      id="myTable"
+      class="table table-striped table-hover table-dark table-responsive"
+    >
+      <thead>
+        <tr>
+
+          <th data-field="id">ID</th>
+          <th data-field="ptype">Тип полиса</th>
+          <th data-field="validity">Срок действия</th>
+          <th data-field="company_name">Название компании</th>
+          <th data-field="amount_sum">Стоимость</th>
+          <th data-field="agent_id">ID Агента</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {% for item in policies %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.ptype }}</td>
+          <td>{{ item.validity }}</td>
+          <td>{{ item.company_name }}</td>
+          <td>{{ "{:,}".format(item.amount_sum).replace(',', ' ').replace('.', ',') }}₽</td>
+          <td>{{ item.agent_id }}</td>
+          <td>
+            <button
+              class="btn btn-outline btn-success"
+              data-toggle="modal"
+              data-target="#Modal-PurchaseConfirm-{{ item.id }}"
+            >Купить полис</button>
+          </td>
+        </tr>
+        <div
+          class="modal fade"
+          id="Modal-PurchaseConfirm-{{ item.id }}"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5
+                  class="modal-title"
+                  id="ModalLabel"
+                >
+                  <!-- -->
+                  ID полиса:
+                  {{ item.id }}
+                  <br>
+                  Стоимость полиса:
+                  {{ "{:,}".format(item.amount_sum).replace(',', ' ').replace('.', ',') }}
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST">
+
+                  <div align="center">
+                    <button
+                      type="submit"
+                      id="purchase-submit"
+                      name="purchase-submit"
+                      value="{{ item.id }}"
+                      class="btn btn-primary"
+                    >Купить</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-4">
+    <h2>Купленные полисы</h2>
+    <br>
+    <div class="row">
+      {% for owned_item in owned_items %}
+      <div class="col-xl-12">
+        <div
+          style="margin-bottom: 5px"
+          class="card text-center bg-dark"
+        >
+          <div class="card-body">
+            <h5 class="card-title">ID полиса: {{ owned_item.policy_id }}--- {{ owned_item.policy.ptype }}</h5>
+
+            <p class="card-text"><strong>
+                Стоимость {{ "{:,}".format(owned_item.policy.amount_sum).replace(',', ' ').replace('.', ',') }}₽
+                <br>
+                Куплен: {{ owned_item.purchase_date.strftime("%d-%m-%Y, %H:%M") }}
+                <br>
+                Срок действия: {{owned_item.policy.validity}}
+              </strong></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- Purchase Confirm -->
+
+{% endblock %}

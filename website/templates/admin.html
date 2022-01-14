@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} Панель Админа {% block content
+%}
+<h1 align="center">Панель Админа</h1>
+<style>
+  .container {
+    padding: 2rem 0rem;
+  }
+
+  .buttons {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+  }
+</style>
+<div
+  class="container"
+  align="center"
+>
+  <div class="row buttons">
+    <div class="col">
+      <a
+        class="btn btn-block btn-primary btn-lg"
+        href="/Admin/agents"
+      >Агенты</a>
+    </div>
+    <div class="col">
+      <a
+        class="btn btn-block btn-primary btn-lg"
+        href="/Admin/clients"
+      >Клиенты</a>
+    </div>
+    <div class="col">
+      <a
+        class="btn btn-block btn-primary btn-lg"
+        href="/Admin/policies"
+      >Полисы</a>
+    </div>
+    <div class="col">
+      <a
+        class="btn btn-block btn-primary btn-lg"
+        href="/Admin/purchases"
+      >Покупки</a>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

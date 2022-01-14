@@ -1,0 +1,139 @@
+{% extends "home.html" %} {% block title %}Моя страница{% endblock %} {% block content
+%}
+<h1 align="center">Моя страница</h1>
+<div class="col-xl-8">
+  <!-- Account details card-->
+  <div class="card text-white bg-dark mb-4">
+    <div class="card-header">Account Details</div>
+    <div class="card-body">
+      <form method="POST">
+        <!-- Form Row-->
+        <div class="row gx-3 mb-3">
+          <!-- Form Group (first name)-->
+          <div class="col-md-4">
+            <label
+              class="small mb-1"
+              for="first_name"
+            >Имя</label>
+            <input
+              class="form-control"
+              id="first_name"
+              name="first_name"
+              type="text"
+              value="{{ clients.first_name }}"
+            >
+          </div>
+          <!-- Form Group (last name)-->
+          <div class="col-md-4">
+            <label
+              class="small mb-1"
+              for="last_name"
+            >Фамилия</label>
+            <input
+              class="form-control"
+              id="last_name"
+              name="last_name"
+              type="text"
+              value="{{ clients.last_name }}"
+            >
+          </div>
+          <!-- Form Group (Middle name)-->
+          <div class="col-md-4">
+            <label
+              class="small mb-1"
+              for="middle_name"
+            >Отчество</label>
+            <input
+              class="form-control"
+              id="last_name"
+              name="middle_name"
+              type="text"
+              value="{{ clients.middle_name }}"
+            >
+          </div>
+        </div>
+        <!-- Form Group (Date of birth)-->
+        <div class="col-mb-3">
+          <label
+            class="small mb-1"
+            for="date_of_birth"
+          >Дата рождения</label>
+          <input
+            class="form-control"
+            id="date_of_birth"
+            name="date_of_birth"
+            type="date"
+            value="{{ clients.date_of_birth }}"
+          >
+        </div>
+
+        <!-- Form Group (email address)-->
+        <div class="mb-3">
+          <label
+            class="small mb-1"
+            for="email"
+          >Email address</label>
+          <input
+            class="form-control"
+            id="email"
+            name="email"
+            type="email"
+            value="{{ clients.user.email }}"
+          >
+        </div>
+        <!-- Form Group (adress)-->
+        <div class="mb-3">
+          <label
+            class="small mb-1"
+            for="address"
+          >Адрес</label>
+          <input
+            class="form-control"
+            id="address"
+            name="address"
+            type="еуче"
+            value="{{ clients.address }}"
+          >
+        </div>
+        <!-- Form Row-->
+        <div class="row gx-3 mb-3">
+          <!-- Form Group (phone number)-->
+          <div class="col-md-6">
+            <label
+              class="small mb-1"
+              for="phone_no"
+            >Номер телефона</label>
+            <input
+              class="form-control"
+              id="phone_no"
+              name="phone_no"
+              type="tel"
+              value="{{ clients.phone_no }}"">
+          </div>
+        <!-- Form Group (password)-->
+        <div class="
+              col-md-6"
+            >
+            <label
+              class="small mb-1"
+              for="password"
+            >Пароль</label>
+            <input
+              class="form-control"
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Введите новый пароль"
+            >
+          </div>
+        </div>
+        <!-- Save changes button-->
+        <button
+          class="btn btn-primary"
+          type="submit"
+        >Сохранить измененися</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
